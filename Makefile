@@ -64,6 +64,10 @@ clean:
 distclean: clean
 	rm -rf $(DEPS_DIR)
 
+Release.txt:
+	# This strips all the blank lines unfortunately
+	@rg --no-line-number -oPU '\A##(?sU:.*)(?=^## )' CHANGELOG.md > Release.txt
+
 $(BUSTED): | $(LUAROCKS)
 	$(LUAROCKS) install busted
 	$(LUAROCKS) install inspect  # helpful for debugging
