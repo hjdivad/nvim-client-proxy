@@ -6,7 +6,7 @@ on:
       - 'v*.*.*'
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
 
@@ -36,11 +36,11 @@ jobs:
 
       - name: tarball
         run: |
-          TAG=$(git name--rev --tags --name-only) ${{github.ref}}
-          TARBALL="nvim-client-proxy-${TAG}.gz"
+          TAG=$(git name-rev --tags --name-only ${{github.ref}})
+          TARBALL="nvim-client-proxy-${TAG}.tar.gz"
           echo TAG=${TAG} >> $GITHUB_ENV
           echo TARBALL=${TARBALL} >> $GITHUB_ENV
-          tar -cfz ${TARBALL} *.md LICENSE src test *.rockspec
+          tar --create -z --file ${TARBALL} *.md LICENSE src test *.rockspec
 
       - name: Release Notes
         run: make Release.txt
