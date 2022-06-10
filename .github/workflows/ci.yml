@@ -1,0 +1,45 @@
+# https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+
+jobs:
+
+  test:
+    name: test
+    # TODO: test on osx as well
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Setup upterm session
+        env:
+          DEBUG_SSH: ${{ secrets.DebugSSH }}
+        if: ${{ env.DEBUG_SSH == 'true' }}
+        uses: lhotari/action-upterm@v1
+        with:
+          ## limits ssh access and adds the ssh public key for the user which triggered the workflow
+          # limit-access-to-actor: true
+          ## limits ssh access and adds the ssh public keys of the listed GitHub users
+          limit-access-to-users: hjdivad
+
+      - name: Download Neovim
+        run: |
+          mkdir -p build
+          wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage
+          chmod +x nvim.appimage
+          mv nvim.appimage ./build/nvim
+          echo "${PWD}/build" >> $GITHUB_PATH
+
+      - name: deps
+        run: make deps
+
+      - name: test
+        run: make test
