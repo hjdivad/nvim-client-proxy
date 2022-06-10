@@ -4,3 +4,4 @@
 /.luarocks
 /local.mk
 /.deps
+/nvimlog
