@@ -32,7 +32,7 @@ MPACK ?= $(DEPS_PREFIX)/lib/luarocks/rocks/mpack
 NVIM_CLIENT ?= $(DEPS_PREFIX)/lib/luarocks/rocks/nvim_client
 
 INSTALL_MPACK ?= $(LUAROCKS) install mpack
-INSTALL_NVIMN_CLIENT ?= $(LUAROCKS) install nvim-client
+INSTALL_NVIM_CLIENT ?= $(LUAROCKS) install nvim-client
 
 # Misc
 # Options used by the 'valgrind' target, which runs the tests under valgrind
