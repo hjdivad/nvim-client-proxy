@@ -28,6 +28,15 @@ jobs:
           tar xfz ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz
           mv ripgrep-13.0.0-x86_64-unknown-linux-musl/rg ./build/rg
 
+      - name: Install Lua
+        uses: leafo/gh-actions-lua@v9
+        with:
+            luaVersion: '5.1.5'
+
+      - name: Install LuaRocks
+        uses: leafo/gh-actions-luarocks@v4
+
+
       - name: deps
         run: make deps
 
