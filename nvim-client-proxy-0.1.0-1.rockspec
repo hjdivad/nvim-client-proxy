@@ -3,8 +3,7 @@
 package = "nvim-client-proxy"
 version = "0.1.0-1"
 source = {
-  url = 'git://github.com/hjdivad/nvim-client-proxy',
-  tag = 'v0.1.0',
+  url = 'https://github.com/hjdivad/nvim-client-proxy/archive/' .. version .. ' .tar.gz',
 }
 description = {
   homepage = "https://github.com/hjdivad/nvim-client-proxy/",
