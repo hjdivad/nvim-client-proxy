@@ -1,7 +1,10 @@
+---@diagnostic disable: lowercase-global
+
 package = "nvim-client-proxy"
-version = "0.1.0"
+version = "0.1.0-1"
 source = {
-  url = 'https://github.com/hjdivad/nvim-client-proxy/archive/' .. version .. '.tar.gz',
+  url = 'git://github.com/hjdivad/nvim-client-proxy',
+  tag = 'v0.1.0',
 }
 description = {
   homepage = "https://github.com/hjdivad/nvim-client-proxy/",
