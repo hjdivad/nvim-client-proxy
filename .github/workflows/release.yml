@@ -58,5 +58,5 @@ jobs:
         run: |
           ./.deps/usr/bin/luarocks make
           ./.deps/usr/bin/luarocks pack nvim-client-proxy
-          ./.deps/usr/bin/luarocks upload --force *.rockspec --api-key=${{ secrets.LUAROCKS_KEY }}
+          ./.deps/usr/bin/luarocks upload *.rockspec --api-key=${{ secrets.LUAROCKS_KEY }}
 
