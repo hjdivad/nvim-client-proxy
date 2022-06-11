@@ -37,8 +37,10 @@ jobs:
       - name: tarball
         run: |
           TAG=$(git name-rev --tags --name-only ${{github.ref}})
-          TARBALL="nvim-client-proxy-${TAG}.tar.gz"
+          VERSION=${TAG:1}
+          TARBALL="nvim-client-proxy-${VERSION}.tar.gz"
           echo TAG=${TAG} >> $GITHUB_ENV
+          echo VERSION=${VERSION} >> $GITHUB_ENV
           echo TARBALL=${TARBALL} >> $GITHUB_ENV
           tar --create -z --file ${TARBALL} *.md LICENSE src test *.rockspec
 
@@ -56,5 +58,5 @@ jobs:
         run: |
           ./.deps/usr/bin/luarocks make
           ./.deps/usr/bin/luarocks pack nvim-client-proxy
-          ./.deps/usr/bin/luarocks upload *.rockspec --api-key=${{ secrets.LUAROCKS_KEY }}
+          ./.deps/usr/bin/luarocks upload --force *.rockspec --api-key=${{ secrets.LUAROCKS_KEY }}
 
