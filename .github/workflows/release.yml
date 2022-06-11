@@ -45,9 +45,15 @@ jobs:
       - name: Release Notes
         run: make Release.txt
 
-      - name: Release
+      - name: GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
             ${{env.TARBALL}}
           body_path: Release.txt
+
+      - name: LuaRocks Release
+        run: |
+          luarocks pack nvim-client-proxy
+          luarocks upload *.rockspec --api-key=${{ secrets.LUAROCKS_KEY }}
+
