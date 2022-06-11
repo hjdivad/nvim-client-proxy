@@ -54,6 +54,6 @@ jobs:
 
       - name: LuaRocks Release
         run: |
-          ./.deps/usr/local/bin/luarocks pack nvim-client-proxy
-          ./.deps/usr/local/bin/luarocks upload *.rockspec --api-key=${{ secrets.LUAROCKS_KEY }}
+          ./.deps/usr/bin/luarocks pack nvim-client-proxy
+          ./.deps/usr/bin/luarocks upload *.rockspec --api-key=${{ secrets.LUAROCKS_KEY }}
 
