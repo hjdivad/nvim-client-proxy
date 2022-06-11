@@ -1,9 +1,12 @@
 ---@diagnostic disable: lowercase-global
 
+local rock_version = '0.1.0'
+local git_tag = 'v' .. rock_version
+
 package = "nvim-client-proxy"
-version = "0.1.0-1"
+version = rock_version .. '-1'
 source = {
-  url = 'https://github.com/hjdivad/nvim-client-proxy/archive/' .. version .. ' .tar.gz',
+  url = 'https://github.com/hjdivad/nvim-client-proxy/archive/' .. git_tag .. ' .tar.gz',
 }
 description = {
   homepage = "https://github.com/hjdivad/nvim-client-proxy/",
