@@ -6,7 +6,7 @@ local git_tag = 'v' .. rock_version
 package = "nvim-client-proxy"
 version = rock_version .. '-1'
 source = {
-  url = 'https://github.com/hjdivad/nvim-client-proxy/archive/' .. git_tag .. ' .tar.gz',
+  url = 'https://github.com/hjdivad/nvim-client-proxy/archive/' .. git_tag .. '.tar.gz',
 }
 description = {
   homepage = "https://github.com/hjdivad/nvim-client-proxy/",
