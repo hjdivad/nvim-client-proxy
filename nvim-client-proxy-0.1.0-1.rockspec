@@ -12,7 +12,7 @@ description = {
 }
 dependencies = {
   'lua >= 5.1',
-  'nvim-client >= 0.2.3-2',
+  'nvim-client >= 0.2.3-1',
 }
 build = {
   type = "builtin",
