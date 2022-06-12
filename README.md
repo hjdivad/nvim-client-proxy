@@ -17,12 +17,58 @@ The intended use case is to have convenient access to the parent neovim instance
 
 ## Install
 
-> **Warning**
-> These instructions are preliminary. This rock is not published yet
+### Linux
 
 ```bash
 luarocks install neovim-client-proxy
 ```
+
+### OSX
+
+
+#### Install Patched Dependencies
+
+[neovim-client-proxy][] and [libmpack][] don't install cleanly on osx and have to be built with patches.
+* https://github.com/neovim/lua-client/pull/55
+* https://github.com/libmpack/libmpack-lua/pull/31
+
+
+Check out both repos and apply their respective patchs. This example uses [gh](https://github.com/cli/cli).
+```bash
+mkdir -p ~/src/{neovim,libmpack}
+gh repo clone libmpack/libmpack-lua ~/src/libmpack/libmpack-lua
+gh repo clone neovim/lua-client ~/src/neovim/lua-client
+
+cd ~/src/neovim/lua-client/
+# check out osx patch
+gh pr checkout 55
+# set up environment so we can install patched deps
+make $(pwd)/.deps/usr/bin/{lua,luarocks}
+
+cd ~/src/libmpack/libmpack-lua/ 
+# check out osx patch
+gh pr checkout 31
+make
+# install a patched libmpack-lua
+luarocks make
+# install a version local to lua-client so we can build
+~/src/neovim/lua-client/.deps/usr/bin/luarocks make
+
+cd ~/src/libmpack/libmpack-lua/ 
+# check out osx patch
+gh pr checkout 31
+make
+# install a patched nvim-client
+luarocks make
+```
+
+#### Install
+
+```bash
+luarocks install neovim-client-proxy
+```
+
+## Build
 
 For instructions on building locally, see [CONTRIBUTING.md](./CONTRIBUTING.md)
 
@@ -73,3 +119,5 @@ vim.opt.runtimepath:append('/some/path')
 [socket_stream.lua]: https://github.com/neovim/lua-client/blob/387fdb32b2e787347aea4a0c896d8b3ffd0491df/nvim/socket_stream.lua
 [child_process_stream.lua]: https://github.com/neovim/lua-client/blob/387fdb32b2e787347aea4a0c896d8b3ffd0491df/nvim/child_process_stream.lua
 [tcp_stream.lua]: https://github.com/neovim/lua-client/blob/387fdb32b2e787347aea4a0c896d8b3ffd0491df/nvim/tcp_stream.lua
+[nvim-client-proxy]:https://github.com/neovim/lua-client
+[libmpack]:https://github.com/libmpack/libmpack-lua
