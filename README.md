@@ -26,46 +26,24 @@ luarocks install neovim-client-proxy
 ### OSX
 
 
-#### Install Patched Dependencies
-
-[neovim-lua-client][] and [libmpack][] don't install cleanly on osx and have to be built with patches.
-* https://github.com/neovim/lua-client/pull/55
+[libmpack][] doesn't install cleanly on osx and requires the following patch:
 * https://github.com/libmpack/libmpack-lua/pull/31
 
 
 Clone both repos and apply their respective patchs. This example uses [gh](https://github.com/cli/cli).
 ```bash
-mkdir -p ~/src/{neovim,libmpack}
+
+# install patched libmpack
+mkdir -p ~/src/libmpack/
 gh repo clone libmpack/libmpack-lua ~/src/libmpack/libmpack-lua
-gh repo clone neovim/lua-client ~/src/neovim/lua-client
-
-cd ~/src/neovim/lua-client/
-# check out osx patch
-gh pr checkout 55
-# set up environment so we can install patched deps
-make $(pwd)/.deps/usr/bin/{lua,luarocks}
-
 cd ~/src/libmpack/libmpack-lua/ 
-# check out osx patch
 gh pr checkout 31
 make
 # install a patched libmpack-lua
 luarocks make
-# install a version local to lua-client so we can build
-~/src/neovim/lua-client/.deps/usr/bin/luarocks make
 
-cd ~/src/libmpack/libmpack-lua/ 
-# check out osx patch
-gh pr checkout 31
-make
-# install a patched nvim-client
-luarocks make
-```
-
-#### Install
-
-```bash
-luarocks install neovim-client-proxy
+# now nvim-client-proxy should install
+luarocks install nvim-client-proxy
 ```
 
 ## Build

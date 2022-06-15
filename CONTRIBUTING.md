@@ -3,7 +3,7 @@
 ## Build
 
 > **Warning**
-> Building on OSX requires patches to both [libmpack-lua][libmpack-patch] and [nvim-client][nvim-client-patch]
+> Building on OSX requires a patched [libmpack-lua][libmpack-patch]
 
 ```bash
 make
@@ -42,4 +42,3 @@ Pushing a tag will automatically trigger the release workflow, which releases to
 
 
 [libmpack-patch]: https://github.com/libmpack/libmpack-lua/pull/31
-[nvim-client-patch]: https://github.com/neovim/lua-client/pull/55
